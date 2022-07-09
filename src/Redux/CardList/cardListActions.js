@@ -26,7 +26,7 @@ export const cardDataError = (err) =>{
 export const fetchData = () =>{
     return async function(dispatch){
 
-        dispatch(cardDataRequest)
+        dispatch(cardDataRequest())
         try{
             const cdata = await axios.get('https://nut-case.s3.amazonaws.com/coursessc.json')
             const datas = cdata.data;
