@@ -13,7 +13,6 @@ function App() {
       <Provider store={store}>
         <div className="App">
           <Navbar />
-          {/* <Home /> */}
           <Routes> 
             <Route exact path='/' element={<Home />} />       
             <Route exact path='/chart' element={<Chart />} />       
