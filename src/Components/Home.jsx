@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import CourseCard from './CourseCard';
 import {fetchData} from '../Redux'
 import TypeWriterEffect from 'react-typewriter-effect';
-import PropagateLoader from "react-spinners/PropagateLoader";
-
 
 
 
@@ -235,137 +233,125 @@ const Home = () => {
 
 
     return (
-       
         <>
-            {
-             
-                loading ? <PropagateLoader className="loader"  color="#000" loading={loading} size={15} /> :
-                
-                (
-                    <>
-                        <div className=" contaiener-fluid contentHome row">
-                            <h1 className='col-md-12 text-center display-4 text-danger'>
-                                <b> Welcome To Course-Finder </b>
-                            </h1>
-                            <h1 className='col-md-12 text-center display-4 '>
-                                    <TypeWriterEffect
-                                        textStyle={{
-                                            fontFamily: 'Red Hat Display',
-                                            color: '#3F3D56',
-                                            fontWeight: 500,
-                                            fontSize: '1.2em',
-                                            textAlign: 'center'
-                                        }}
-                                        
-                                        cursorColor="#3F3D56"
-                                        multiText={[
-                                            'Find Your Courses Here...',
-                                            'Start Your Course Today...',
-                                            'Happy Learning :)'
-                                        ]}
-                                        multiTextDelay={1000}
-                                        typeSpeed={80}
-                                        multiTextLoop
-                                    />
-                                    
-                            </h1>
-                            <div className="container mt-4  col-md-12 homeSearch">
-                                <Autocomplete
-                                    value={value}
-                                    onChange={(event, newValue) => {
-                                        setValue(newValue);
-                                        setValue2(null)
-                                    }}
-                                    inputValue={inputValue}
-                                    onInputChange={(event, newInputValue) => {
-                                        setInputValue(newInputValue);
-                                    }}
-                                    id="controllable-states-demo"
-                                    options={childSubject}
-                                    sx={{ width: 300 }}
-                                    renderInput={(params) => <TextField {...params} label="Child Subject" />}
-                                />
-                                <Autocomplete
-                                    disablePortal
-                                    value={value2}
-                                    onChange={(event, newValue2) => {
-                                        setValue2(newValue2);
-                                    }}
-                                    id="combo-box-demo"
-                                    inputValue={inputValue2}
-                                    onInputChange={(event, newInputValue2) => {
-                                        setInputValue2(newInputValue2);
-                                    }}
-                                    options={courses}
-                                    sx={{ width: 300 }}
-                                    renderInput={(params) => <TextField {...params} label="Course Name" />}
-                                />
-                                <FormGroup>
-                                    <FormControlLabel 
-                                        control={<Checkbox checked={checked}
-                                                    onChange={handleChange}
-                                                    inputProps={{ 'aria-label': 'controlled' }}     
-                                                />} 
-                                        label="Self Paced" />
-                                </FormGroup>
-                                <Button variant='contained' onClick={searchCourses} > Search </Button>
-                                <Button variant='contained' onClick={()=>{setReset(!reset); setValue(null); setValue2(null); setChecked(false); setPag(false);setPage(1)}} > Reset </Button>
-                            </div>
-                                        
-                    
-                        </div>
-                        <br /><br /> <br />
-
-                        <div className="container cardsContainer row">
-                            {   
-                                error ? (<h3 className="text-center"> {error} </h3>) : cardData.length===0? (
-                                    <h3 className="text-center"> No Courses Found </h3>
-                                ) :
-                                    cardData.map((curr, index)=>{
-                                        return (
-                                            <div className="col-md-4">
-                                                <CourseCard
-                                                    key={curr.index}
-                                                    courseName={curr['Course Name']}
-                                                    parentSub={curr['Parent Subject']}
-                                                    childSub={curr['Child Subject']}
-                                                    courseId={curr['Course Id']}
-                                                    provider={curr['Provider']}
-                                                    nxtSess={curr['Next Session Date']}
-                                                    uni={curr['Universities/Institutions']}
-                                                    url={curr['Url']}
-                                                    vurl={curr['Video(Url)']}
-                                                />
-                                            </div>
-                                        )
-                                    })
-                                
-                            }
+            <div className=" contaiener-fluid contentHome row">
+                <h1 className='col-md-12 text-center display-4 text-danger'>
+                    <b> Welcome To Course-Finder </b>
+                </h1>
+                <h1 className='col-md-12 text-center display-4 '>
+                        <TypeWriterEffect
+                            textStyle={{
+                                fontFamily: 'Red Hat Display',
+                                color: '#3F3D56',
+                                fontWeight: 500,
+                                fontSize: '1.2em',
+                                textAlign: 'center'
+                            }}
                             
-                            <div className="container d-flex mt-3 justify-content-end me-5 pe-5 ">
-                                <Stack spacing={2}>
-                                    {
-                                        !pag ? (
-                                            <Pagination count={Math.ceil(pagination.count/pageSize)} showFirstButton showLastButton 
-                                                onChange={handlePageChange}
-                                                page={page}
-                                            />
-                                        ):
-                                        (
-                                            <Pagination count={Math.ceil(pagination2.count/pageSize)} showFirstButton showLastButton 
-                                                onChange={handlePageChange2}
-                                                page={page2}
-                                            />
-                                        )
-                                    }
-                                </Stack>
-                            </div>
-                            <br /> <br />
-                        </div>
-                    </>
-                      
-                )
-            }
+                            cursorColor="#3F3D56"
+                            multiText={[
+                                'Find Your Courses Here...',
+                                'Start Your Course Today...',
+                                'Happy Learning :)'
+                            ]}
+                            multiTextDelay={1000}
+                            typeSpeed={80}
+                            multiTextLoop
+                        />
+                        
+                </h1>
+                <div className="container mt-4  col-md-12 homeSearch">
+                    <Autocomplete
+                        value={value}
+                        onChange={(event, newValue) => {
+                            setValue(newValue);
+                            setValue2(null)
+                        }}
+                        inputValue={inputValue}
+                        onInputChange={(event, newInputValue) => {
+                            setInputValue(newInputValue);
+                        }}
+                        id="controllable-states-demo"
+                        options={childSubject}
+                        sx={{ width: 300 }}
+                        renderInput={(params) => <TextField {...params} label="Child Subject" />}
+                    />
+                    <Autocomplete
+                        disablePortal
+                        value={value2}
+                        onChange={(event, newValue2) => {
+                            setValue2(newValue2);
+                        }}
+                        id="combo-box-demo"
+                        inputValue={inputValue2}
+                        onInputChange={(event, newInputValue2) => {
+                            setInputValue2(newInputValue2);
+                        }}
+                        options={courses}
+                        sx={{ width: 300 }}
+                        renderInput={(params) => <TextField {...params} label="Course Name" />}
+                    />
+                    <FormGroup>
+                        <FormControlLabel 
+                            control={<Checkbox checked={checked}
+                                        onChange={handleChange}
+                                        inputProps={{ 'aria-label': 'controlled' }}     
+                                    />} 
+                            label="Self Paced" />
+                    </FormGroup>
+                    <Button variant='contained' onClick={searchCourses} > Search </Button>
+                    <Button variant='contained' onClick={()=>{setReset(!reset); setValue(null); setValue2(null); setChecked(false); setPag(false);setPage(1)}} > Reset </Button>
+                </div>
+                            
+          
+            </div>
+            <br /><br /> <br />          
+            <div className="container cardsContainer row">
+                {   
+                    loading ? (<h3 className="text-center"> Loading... </h3>) : error ? (<h3 className="text-center"> {error} </h3>) : cardData.length===0? (
+                        <h3 className="text-center"> No Courses Found </h3>
+                    ) :
+                        cardData.map((curr, index)=>{
+                            return (
+                                <div className="col-md-4">
+                                    <CourseCard
+                                        key={curr.index}
+                                        courseName={curr['Course Name']}
+                                        parentSub={curr['Parent Subject']}
+                                        childSub={curr['Child Subject']}
+                                        courseId={curr['Course Id']}
+                                        provider={curr['Provider']}
+                                        nxtSess={curr['Next Session Date']}
+                                        uni={curr['Universities/Institutions']}
+                                        url={curr['Url']}
+                                        vurl={curr['Video(Url)']}
+                                    />
+                                </div>
+                            )
+                        })
+                    
+                }
+                
+                <div className="container d-flex mt-3 justify-content-end me-5 pe-5 ">
+                    <Stack spacing={2}>
+                        {
+                            !pag ? (
+                                <Pagination count={Math.ceil(pagination.count/pageSize)} showFirstButton showLastButton 
+                                    onChange={handlePageChange}
+                                    page={page}
+                                />
+                            ):
+                            (
+                                <Pagination count={Math.ceil(pagination2.count/pageSize)} showFirstButton showLastButton 
+                                    onChange={handlePageChange2}
+                                    page={page2}
+                                />
+                            )
+                        }
+                    </Stack>
+                </div>
+                <br /> <br />
+            </div>
         </>
     )
 }
