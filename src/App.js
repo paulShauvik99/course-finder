@@ -1,24 +1,32 @@
 import React from 'react'
-import Home from './Components/Home';
+import Home2 from './Components/Home2';
 import Navbar from './Components/Navbar';
 import { Route, Routes } from 'react-router-dom'
-import Chart from './Components/Chart';
 import {Provider} from 'react-redux'
-import store from './Redux/store'
+import store from './Redux/store';
+import Courses from './Components/Courses';
+import Footer from './Components/Footer';
+import About from './Components/About';
+
 
 
 function App() {
     return (
       
-      <Provider store={store}>
+      <Provider store={store} >
         <div className="App">
           <Navbar />
-          <Routes> 
-            <Route exact path='/' element={<Home />} />       
-            <Route exact path='/chart' element={<Chart />} />       
-          </Routes> 
+          <div className="main_content">
+            <Routes> 
+              <Route exact path='/' element={<Home2 />} />       
+              <Route exact path='/courses' element={<Courses />} />       
+              <Route exact path='/about' element={<About />} />       
+            </Routes> 
+          </div>
+          <Footer />        
         </div>
       </Provider>
+
     );
 }
 

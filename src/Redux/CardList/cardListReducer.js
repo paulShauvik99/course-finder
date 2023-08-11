@@ -1,9 +1,9 @@
-import {CARD_DATA_REQUEST,CARD_DATA_SUCCESS,CARD_DATA_ERROR} from './cardListTypes'
+import {BOOKMARK_CARD_FLAG , FAVORITE_CARD_FLAG} from './cardListTypes'
 
 
 const initialState= {
-    loading: false,
-    cardData: [],
+    bookmarkCourses: [],
+    favoriteCourses: [],
     error : ''   
 }
 
@@ -11,27 +11,44 @@ const initialState= {
 
 
 const cardDataReducer = (state = initialState, action) =>{
+
+    console.log(state.bookmarkCourses)
+    console.log(state.favoriteCourses)
+
     switch(action.type){
-        case CARD_DATA_REQUEST:
+        
+        case BOOKMARK_CARD_FLAG: {
+            
+            if(!state.bookmarkCourses.some(ele => ele.id === action.payload.id)){
+                state.bookmarkCourses = [ ...state.bookmarkCourses ,  action.payload ]
+                
+            }else{
+                state.bookmarkCourses = state.bookmarkCourses.filter((ele) =>{ return ele.id!==action.payload.id} )
+                
+            }
+            
             return{
                 ...state,
-                loading: true,
+                bookmarkCourses : state.bookmarkCourses,
             }
+        }
         
-        case CARD_DATA_SUCCESS: 
-            return{
-                loading : false,
-                cardData : action.payload,
-                error : ''
-            }
-        
-        case CARD_DATA_ERROR:
-            return{
-                loading : false,
-                cardData : [],
-                error : action.payload
+        case FAVORITE_CARD_FLAG:{
+
+            if(!state.favoriteCourses.some(ele => ele.id === action.payload.id)){
+                state.favoriteCourses = [ ...state.favoriteCourses ,  action.payload ]
+                
+            }else{
+                state.favoriteCourses = state.favoriteCourses.filter((ele) =>{ return ele.id!==action.payload.id} )
+                
             }
 
+            return{
+                ...state,
+                favoriteCourses : state.favoriteCourses
+            }
+
+        }
         default : return state
     }
 }
