@@ -234,7 +234,7 @@ const Courses = () => {
                                                                         course_headline = {curr.prop.course_headline}
                                                                         course_price = {curr.prop.course_price}
                                                                         course_img_alt = {curr.prop.course_img_alt}                
-                                                                        course_url={curr.prop.url}
+                                                                        course_url={curr.prop.course_url}
                                                                     />
                                                                 
                                                                 </div>    
@@ -269,7 +269,7 @@ const Courses = () => {
                                                                             course_headline = {curr.prop.course_headline}
                                                                             course_price = {curr.prop.course_price}
                                                                             course_img_alt = {curr.prop.course_img_alt}      
-                                                                            course_url={curr.prop.url}
+                                                                            course_url={curr.prop.course_url}
                                                                         />
                                                                     </div>    
                                                                 )    
